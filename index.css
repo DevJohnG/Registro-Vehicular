@@ -1,0 +1,71 @@
+/*------------------------------------------------ BODY -------------------------------------------------------*/
+
+body{
+    background-color: white;
+}
+
+/*---------------------------------------------- Header -------------------------------------------------------*/
+
+header{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 50px 50px;
+}
+
+header h2{
+    padding: 10px 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header img{
+    height:100px;
+    width: 100px;
+    border-radius: 50px;
+}
+
+/*------------------------------------------------ MAIN CONTAINER -------------------------------------------------------*/
+
+.mainCont{
+    padding: 70px 70px;
+    border-radius: 20px;
+    background-color: rgba(1, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.mainCont a{
+    width: 150px;
+    justify-self: center;
+    text-decoration: none;
+    text-align: center;
+    font-size: larger;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+    background-color: red;  
+    border-radius: 35px;
+    padding: 30px 30px;
+    font-weight: bold;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);
+}
+
+/*------------------------------------------------ Footer -------------------------------------------------------*/
+
+footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 50px;
+}
+
+footer h3{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+/*------------------------------------------------  -------------------------------------------------------*/
+
+/*------------------------------------------------  -------------------------------------------------------*/
+
+

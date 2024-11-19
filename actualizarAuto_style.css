@@ -1,0 +1,87 @@
+.error {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
+.success {
+    color: green;
+    font-weight: bold;
+    text-align: center;
+}
+
+/*------------------------------------------------ BODY -------------------------------------------------------*/
+
+body{
+    background-color: white;
+}
+
+/*------------------------------------------------ HEADER -------------------------------------------------------*/
+
+header{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 50px 50px;
+}
+
+header h2{
+    padding: 10px 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header img{
+    height:100px;
+    width: 100px;
+    border-radius: 50px;
+}
+
+/*------------------------------------------------ MAIN CONTAINER -------------------------------------------------------*/
+
+.mainCont{
+    padding: 70px 70px;
+    border-radius: 20px;
+    background-color: rgba(1, 0, 0, 0.1);
+    justify-content: space-between;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+}
+
+.mainCont label{
+    text-align: center;
+    padding-right: 10px;
+    font-weight: 900;
+}
+
+.mainCont form{
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    grid-gap: 10px;
+    align-items: center;
+    max-width: 500px;
+    margin: 0 auto;
+    justify-content: center;
+    text-align: center;
+}
+
+.mainCont input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.mainCont input[type="submit"] {
+    grid-column: span 2;
+    padding: 10px;
+    cursor: pointer;
+    width: 150px;
+    justify-self: center;
+    font-size: larger;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+    background-color: red;  
+    border-radius: 35px;
+    font-weight: bold;
+}
+

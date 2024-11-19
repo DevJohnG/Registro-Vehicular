@@ -1,0 +1,75 @@
+CREATE DATABASE gestion_automoviles;
+
+USE gestion_automoviles;
+
+CREATE TABLE marcas (
+    id_marca INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_marca VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE modelos (
+    id_modelo INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_modelo VARCHAR(50) NOT NULL,
+    id_marca INT,
+    FOREIGN KEY (id_marca) REFERENCES marcas(id_marca)
+);
+
+CREATE TABLE tipos_vehiculos (
+    id_tipovehiculo INT AUTO_INCREMENT PRIMARY KEY,
+    tipo_vehiculo VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE propietarios (
+    id_propietario INT PRIMARY KEY,
+    nombre_propietario VARCHAR(50) NOT NULL,
+    apellido_propietario VARCHAR(50) NOT NULL,
+    telefono_propietario VARCHAR(20) NOT NULL,
+    tipo_propietario ENUM('Natural', 'Jurídico') NOT NULL,
+    correo_propietario VARCHAR(50) NOT NULL
+);
+
+ALTER TABLE automoviles
+    DROP COLUMN modelo,
+    DROP COLUMN marca,
+    DROP COLUMN tipo_auto,
+    ADD id_propietario INT,
+    ADD id_marca INT,
+    ADD id_modelo INT,
+    ADD id_tipovehiculo INT,
+    ADD FOREIGN KEY (id_propietario) REFERENCES propietarios(id_propietario),
+    ADD FOREIGN KEY (id_marca) REFERENCES marcas(id_marca),
+    ADD FOREIGN KEY (id_modelo) REFERENCES modelos(id_modelo),
+    ADD FOREIGN KEY (id_tipovehiculo) REFERENCES tipos_vehiculos(id_tipovehiculo);
+
+    INSERT INTO marcas (nombre_marca) VALUES ('Toyota');
+INSERT INTO marcas (nombre_marca) VALUES ('Honda');
+INSERT INTO marcas (nombre_marca) VALUES ('Nissan');
+INSERT INTO marcas (nombre_marca) VALUES ('Kawasaki'); -- Motocicleta
+INSERT INTO marcas (nombre_marca) VALUES ('Ford');
+
+-- Modelos para Toyota
+INSERT INTO modelos (nombre_modelo, id_marca) VALUES ('Corolla', 1);
+INSERT INTO modelos (nombre_modelo, id_marca) VALUES ('Hilux', 1);
+INSERT INTO modelos (nombre_modelo, id_marca) VALUES ('Yaris', 1);
+
+-- Modelos para Honda
+INSERT INTO modelos (nombre_modelo, id_marca) VALUES ('Civic', 2);
+INSERT INTO modelos (nombre_modelo, id_marca) VALUES ('Accord', 2);
+INSERT INTO modelos (nombre_modelo, id_marca) VALUES ('CR-V', 2);
+
+-- Modelos para Nissan
+INSERT INTO modelos (nombre_modelo, id_marca) VALUES ('Sentra', 3);
+INSERT INTO modelos (nombre_modelo, id_marca) VALUES ('Rogue', 3);
+INSERT INTO modelos (nombre_modelo, id_marca) VALUES ('Frontier', 3);
+
+-- Modelos para Kawasaki
+INSERT INTO modelos (nombre_modelo, id_marca) VALUES ('Ninja 400', 4);
+INSERT INTO modelos (nombre_modelo, id_marca) VALUES ('Z400', 4);
+INSERT INTO modelos (nombre_modelo, id_marca) VALUES ('Versys-X 300', 4);
+
+-- Modelos para Ford
+INSERT INTO modelos (nombre_modelo, id_marca) VALUES ('Fiesta', 5);
+INSERT INTO modelos (nombre_modelo, id_marca) VALUES ('Escape', 5);
+INSERT INTO modelos (nombre_modelo, id_marca) VALUES ('F-150', 5);
+
+ 
