@@ -11,8 +11,8 @@
 <div class="confirmation-message">
 <?php
 
-include 'includes/Database.php';
-include 'includes/Propietario.php';
+include '../Database.php';
+include '../Propietario.php';
 
 $database = new Database();
 $db = $database->getConnection();

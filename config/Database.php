@@ -1,7 +1,7 @@
 <?php
 class Database {
     private $host = "localhost";
-    private $db_name = "gestion_automoviles";
+    private $db_name = "registrovehicular";
     private $username = "root"; 
     private $password = ""; 
     private $conn;

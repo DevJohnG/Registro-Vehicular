@@ -72,4 +72,99 @@ INSERT INTO modelos (nombre_modelo, id_marca) VALUES ('Fiesta', 5);
 INSERT INTO modelos (nombre_modelo, id_marca) VALUES ('Escape', 5);
 INSERT INTO modelos (nombre_modelo, id_marca) VALUES ('F-150', 5);
 
+ /////////////////////////////////////////////////////////////////////////////////////////////////
+
+CREATE DATABASE registrovehicular;
+USE registrovehicular;
+
+-- Tabla de marcas
+CREATE TABLE marcas (
+    id_marca INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_marca VARCHAR(50) NOT NULL
+);
+
+-- Tabla de modelos
+CREATE TABLE modelos (
+    id_modelo INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_modelo VARCHAR(50) NOT NULL,
+    id_marca INT,
+    FOREIGN KEY (id_marca) REFERENCES marcas(id_marca)
+);
+
+-- Tabla de tipos de vehículos
+CREATE TABLE tipos_vehiculos (
+    id_tipovehiculo INT AUTO_INCREMENT PRIMARY KEY,
+    tipo_vehiculo VARCHAR(50) NOT NULL
+);
+
+-- Tabla de propietarios
+CREATE TABLE propietarios (
+    id_propietario INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_propietario VARCHAR(50) NOT NULL,
+    apellido_propietario VARCHAR(50) NOT NULL,
+    telefono_propietario VARCHAR(20) NOT NULL,
+    tipo_propietario ENUM('Natural', 'Jurídico') NOT NULL,
+    domicilio_propietario VARCHAR(100) NOT NULL,
+    numero_identificacion VARCHAR(50) NOT NULL UNIQUE,
+    correo_propietario VARCHAR(50) NOT NULL
+);
+
+-- Tabla de aseguradoras
+CREATE TABLE aseguradoras (
+    id_aseguradora INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_aseguradora VARCHAR(100) NOT NULL
+);
+
+-- Tabla de automóviles
+CREATE TABLE automoviles (
+    id_vehiculo INT AUTO_INCREMENT PRIMARY KEY,
+    vin VARCHAR(17) NOT NULL UNIQUE,
+    placa VARCHAR(20) NOT NULL UNIQUE,
+    id_marca INT,
+    id_modelo INT,
+    anio INT NOT NULL,
+    color VARCHAR(30) NOT NULL,
+    id_tipovehiculo INT,
+    capacidad_motor VARCHAR(10),
+    num_cilindros INT,
+    tipo_combustible ENUM('Gasolina', 'Diésel', 'Eléctrico', 'Híbrido') NOT NULL,
+    peso_bruto DECIMAL(10, 2),
+    transmision ENUM('Manual', 'Automática') NOT NULL,
+    id_propietario INT,
+    FOREIGN KEY (id_marca) REFERENCES marcas(id_marca),
+    FOREIGN KEY (id_modelo) REFERENCES modelos(id_modelo),
+    FOREIGN KEY (id_tipovehiculo) REFERENCES tipos_vehiculos(id_tipovehiculo),
+    FOREIGN KEY (id_propietario) REFERENCES propietarios(id_propietario)
+);
+
+-- Tabla de seguros
+CREATE TABLE seguros (
+    id_seguro INT AUTO_INCREMENT PRIMARY KEY,
+    id_vehiculo INT,
+    id_aseguradora INT,
+    poliza_seguro VARCHAR(50) NOT NULL,
+    fecha_inicio DATE NOT NULL,
+    fecha_vencimiento DATE NOT NULL,
+    FOREIGN KEY (id_aseguradora) REFERENCES aseguradoras(id_aseguradora),
+    FOREIGN KEY (id_vehiculo) REFERENCES automoviles(id_vehiculo)
+);
+
+
+-- Inserción de ejemplos en las tablas de marcas y modelos
+INSERT INTO marcas (nombre_marca) VALUES ('Toyota'), ('Honda'), ('Nissan'), ('Kawasaki'), ('Ford');
+
+-- Modelos para Toyota
+INSERT INTO modelos (nombre_modelo, id_marca) VALUES ('Corolla', 1), ('Hilux', 1), ('Yaris', 1);
+
+-- Modelos para Honda
+INSERT INTO modelos (nombre_modelo, id_marca) VALUES ('Civic', 2), ('Accord', 2), ('CR-V', 2);
+
+-- Modelos para Nissan
+INSERT INTO modelos (nombre_modelo, id_marca) VALUES ('Sentra', 3), ('Rogue', 3), ('Frontier', 3);
+
+-- Modelos para Kawasaki
+INSERT INTO modelos (nombre_modelo, id_marca) VALUES ('Ninja 400', 4), ('Z400', 4), ('Versys-X 300', 4);
+
+-- Modelos para Ford
+INSERT INTO modelos (nombre_modelo, id_marca) VALUES ('Fiesta', 5), ('Escape', 5), ('F-150', 5);
  

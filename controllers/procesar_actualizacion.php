@@ -1,7 +1,7 @@
 <?php
 
-include 'includes/Database.php';
-include 'includes/Automovil.php';
+include '../Database.php';
+include '../Automovil.php';
 
 $database = new Database();
 $db = $database->getConnection();
