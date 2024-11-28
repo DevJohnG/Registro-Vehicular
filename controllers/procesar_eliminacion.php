@@ -23,6 +23,12 @@ $automovil = new Automovil($db);
 
 if (isset($_POST['eliminar'])) {
     $placa = $_POST['placa'];
+    if (isset($_POST['placa']) && !empty($_POST['placa'])) {
+        $placa = htmlspecialchars(strip_tags($_POST['placa']));
+    } else {
+        echo "No se proporcionó una placa válida.";
+        exit;
+    }
     if ($automovil->eliminar($placa)) {
         echo "Automóvil eliminado exitosamente.";
     } else {

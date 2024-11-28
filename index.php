@@ -20,11 +20,11 @@
 </header>
     
 <section class="mainCont">
-    <a href="registrar_propietario.php">REGISTRAR PROPIETARIO</a>
-    <a href="registrar_automovil.php">REGISTRAR AUTOMÓVIL</a>
-    <a href="buscar_automovil.php">BUSCAR AUTOMÓVIL</a>
-    <a href="eliminar_automovil.php">ELIMINAR AUTOMÓVIL</a>
-    <a href="actualizar_automovil.php">ACTUALIZAR AUTOMÓVIL</a>
+    <a href="views/registrar_propietario.php">REGISTRAR PROPIETARIO</a>
+    <a href="views/registrar_automovil.php">REGISTRAR AUTOMÓVIL</a>
+    <a href="views/buscar_automovil.php">BUSCAR AUTOMÓVIL</a>
+    <a href="views/eliminar_automovil.php">ELIMINAR AUTOMÓVIL</a>
+    <a href="views/actualizar_automovil.php">ACTUALIZAR AUTOMÓVIL</a>
     </section>
 
     <footer>   

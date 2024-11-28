@@ -16,21 +16,28 @@
 </header>
 
 <section class="mainCont">
-    <form action="procesar_registro.php" method="post">
+    <form action="/controllers/procesar_registro.php" method="post">
+        <!-- Campos básicos -->
+        <label for="vin">VIN:</label>
+        <input type="text" id="vin" name="vin" maxlength="17" required>
+
+        <label for="placa">Placa:</label>
+        <input type="text" id="placa" name="placa" required>
+
         <label for="id_marca">Marca:</label>
         <select id="id_marca" name="id_marca" required>
             <option value="">Seleccione una marca</option>
             <?php
-            include 'includes/Database.php';
-            $database = new Database();
-            $db = $database->getConnection();
-            $query = "SELECT id_marca, nombre_marca FROM marcas";
-            $stmt = $db->prepare($query);
-            $stmt->execute();
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo "<option value='{$row['id_marca']}'>{$row['nombre_marca']}</option>";
-            }
-            ?>
+include __DIR__ . '/../config/Database.php';
+
+try {
+    $database = new Database();
+    $db = $database->getConnection();
+} catch (Exception $e) {
+    echo "Error al conectar a la base de datos: " . $e->getMessage();
+    exit; // Detiene el script si no se puede conectar
+}
+?>
         </select>
 
         <label for="id_modelo">Modelo:</label>
@@ -42,19 +49,46 @@
         <input type="number" id="anio" name="anio" min="1990" max="2025" required>
 
         <label for="color">Color:</label>
-        <input type="text" id="color" name="color" required>  
+        <input type="text" id="color" name="color" required>
 
-        <label for="placa">Placa:</label>
-        <input type="text" id="placa" name="placa" required>
+        <!-- Nuevos campos según la base de datos -->
+        <label for="id_tipovehiculo">Tipo de Vehículo:</label>
+        <select id="id_tipovehiculo" name="id_tipovehiculo" required>
+            <option value="">Seleccione un tipo</option>
+            <?php
+            $query = "SELECT id_tipovehiculo, tipo_vehiculo FROM tipos_vehiculos";
+            $stmt = $db->prepare($query);
+            $stmt->execute();
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                echo "<option value='{$row['id_tipovehiculo']}'>{$row['tipo_vehiculo']}</option>";
+            }
+            ?>
+        </select>
 
-        <label for="num_motor">Número de motor:</label>
-        <input type="text" id="num_motor" name="num_motor" required>
+        <label for="capacidad_motor">Capacidad del Motor:</label>
+        <input type="text" id="capacidad_motor" name="capacidad_motor">
 
-        <label for="num_chasis">Número de Chasis:</label>
-        <input type="text" id="num_chasis" name="num_chasis" required>
+        <label for="num_cilindros">Número de Cilindros:</label>
+        <input type="number" id="num_cilindros" name="num_cilindros">
 
-        <label for="tipo_vehiculo">Tipo de auto:</label>
-        <input type="text" id="tipo_vehiculo" name="tipo_vehiculo" readonly>
+        <label for="tipo_combustible">Tipo de Combustible:</label>
+        <select id="tipo_combustible" name="tipo_combustible" required>
+            <option value="">Seleccione un tipo</option>
+            <option value="Gasolina">Gasolina</option>
+            <option value="Diésel">Diésel</option>
+            <option value="Eléctrico">Eléctrico</option>
+            <option value="Híbrido">Híbrido</option>
+        </select>
+
+        <label for="peso_bruto">Peso Bruto (kg):</label>
+        <input type="number" id="peso_bruto" name="peso_bruto" step="0.01">
+
+        <label for="transmision">Transmisión:</label>
+        <select id="transmision" name="transmision" required>
+            <option value="">Seleccione</option>
+            <option value="Manual">Manual</option>
+            <option value="Automática">Automática</option>
+        </select>
 
         <label for="id_propietario">Propietario (ID):</label>
         <select id="id_propietario" name="id_propietario" required>
@@ -69,23 +103,20 @@
             ?>
         </select>
 
-
-
         <br>
-
         <input type="submit" value="Registrar">
     </form>
 </section>
 
 <script>
+// Scripts para modelos dinámicos
 $(document).ready(function() {
     $('#id_marca').change(function() {
         var id_marca = $(this).val();
-        $('#tipo_vehiculo').val(''); 
         if (id_marca != '') {
             $.ajax({
                 type: 'POST',
-                url: 'obtener_modelos.php',
+                url: '/controllers/obtener_modelos.php',
                 data: {id_marca: id_marca},
                 dataType: 'json',
                 success: function(data) {
@@ -101,26 +132,8 @@ $(document).ready(function() {
             $('#id_modelo').append('<option value="">Seleccione un modelo</option>');
         }
     });
-
-    $('#id_modelo').change(function() {
-    var id_modelo = $(this).val();
-    if (id_modelo != '') {
-        $.ajax({
-            type: 'POST',
-            url: 'obtener_tipovehiculo.php', // Crea este archivo para obtener el tipo
-            data: {id_modelo: id_modelo},
-            dataType: 'json',
-            success: function(data) {
-               $('#tipo_vehiculo').val(data.tipo_vehiculo); // Actualiza el ID correcto
-            }
-        });
-    } else {
-        $('tipo_vehiculo').val(''); // Limpiar el campo si no hay modelo seleccionado
-    }
 });
-
-});
-
 </script>
+
 </body>
 </html>
